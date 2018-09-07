@@ -2,39 +2,47 @@ package br.unipe.danillo.java.web.entidades;
 
 
 
-import javax.persistence.Column;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity
-@Table(name = "CLIENTE")
 public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID", nullable=true)
-	private String id;
+	private Long id;
 	
-	@Column(name="NOME", nullable=true)
 	private String nome;
 	
-	@Column(name="SOBRENOME", nullable=true)
 	private String sobrenome;
 	
-	@Column(name="MATRICULA", nullable=true)
 	private String matricula;
 	
-	@Column(name="ATIVO", nullable=true)
 	private Boolean ativo;
 	
+	@OneToMany(mappedBy = "cliente")
+	private List<Preferencia> preferencias;
 	
-	public String getId() {
+	
+	
+	public List<Preferencia> getPreferencias() {
+		return preferencias;
+	}
+	
+	public void setPreferencias(List<Preferencia> preferencias) {
+		this.preferencias = preferencias;
+	}
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {

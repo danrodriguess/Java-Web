@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,15 +16,20 @@ public class Preferencia {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="PREF_ID", nullable=true)
 	private Long id;
 	
-	@Column(name="IDCLIENTE", nullable=true)
-	private Cliente idCliente;
-	
 	@ManyToOne
-	@Column(name="PREFERENCIAS", nullable=true)
-	private String preferencias;
+	private Cliente cliente;
+	
+	private String preferencia;
+	
+	public String getPreferencia() {
+		return preferencia;
+	}
+	
+	public void setPreferencia(String preferencia) {
+		this.preferencia = preferencia;
+	}
 	
 	public Long getId() {
 		return id;
@@ -31,17 +37,11 @@ public class Preferencia {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Cliente getIdCliente() {
-		return idCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public void setIdCliente(Cliente idCliente) {
-		this.idCliente = idCliente;
-	}
-	public String getPreferencias() {
-		return preferencias;
-	}
-	public void setPreferencias(String preferencias) {
-		this.preferencias = preferencias;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

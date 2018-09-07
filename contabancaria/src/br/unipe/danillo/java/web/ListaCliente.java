@@ -16,13 +16,16 @@ public class ListaCliente {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("cadastro");
 		EntityManager manager = factory.createEntityManager();
 				
+		manager.getTransaction().begin();
 		
-		Query query = manager.createQuery("SELECT * FROM CLIENTE c", Cliente.class);
+		//Query query = manager.createQuery("SELECT c FROM CLIENTE c", Cliente.class);
+		Query query = manager.createQuery("SELECT c FROM Cliente c JOIN FETCH Cliente preferencias", Cliente.class);
 		List<Cliente> lista = query.getResultList();
 		
-		for(Cliente c : lista)		
-		System.out.println(c);
-		
+		for(Cliente c : lista) {	
+			c.getPreferencias();
+			System.out.println(c);
+		}
 		manager.close();
 		factory.close();
 		
